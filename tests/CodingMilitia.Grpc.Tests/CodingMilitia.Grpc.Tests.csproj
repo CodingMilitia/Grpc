@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
@@ -10,6 +9,12 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0-preview-20170628-02" />
     <PackageReference Include="xunit" Version="2.2.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\CodingMilitia.Grpc.Shared\CodingMilitia.Grpc.Shared.csproj" />
+    <ProjectReference Include="..\..\src\CodingMilitia.Grpc.Server\CodingMilitia.Grpc.Server.csproj" />
+    <ProjectReference Include="..\..\src\CodingMilitia.Grpc.Client\CodingMilitia.Grpc.Client.csproj" />
   </ItemGroup>
 
 </Project>

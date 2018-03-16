@@ -1,4 +1,4 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{76CBEA9A-1F6
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingMilitia.Grpc.Client", "src\CodingMilitia.Grpc.Client\CodingMilitia.Grpc.Client.csproj", "{62C7ACC6-E809-4AD3-8E07-2BA72F79FFE4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingMilitia.Grpc.Core", "src\CodingMilitia.Grpc.Core\CodingMilitia.Grpc.Core.csproj", "{80E82FEB-0EA9-4036-9AA6-0C85E2566F73}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingMilitia.Grpc.Shared", "src\CodingMilitia.Grpc.Shared\CodingMilitia.Grpc.Shared.csproj", "{80E82FEB-0EA9-4036-9AA6-0C85E2566F73}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingMilitia.Grpc.Server", "src\CodingMilitia.Grpc.Server\CodingMilitia.Grpc.Server.csproj", "{EEC3CE9B-D020-43FD-80C5-65CE0F2A7FDB}"
 EndProject

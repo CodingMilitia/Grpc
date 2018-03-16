@@ -1,5 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  
+
+  <ItemGroup>
+    <ProjectReference Include="..\CodingMilitia.Grpc.Shared\CodingMilitia.Grpc.Shared.csproj" />
+  </ItemGroup>
+
+  
+
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
