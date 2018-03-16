@@ -85,7 +85,15 @@ namespace CodingMilitia.Grpc.Server.Internal
 
         internal GrpcHost<TService> Build()
         {
-            return new GrpcHost<TService>(_builder.Build());
+            var server = new global::Grpc.Core.Server
+            {
+                Ports = { { _uri.OriginalString, _port, ServerCredentials.Insecure } },
+                Services =
+                {
+                    _builder.Build()
+                }
+            };
+            return new GrpcHost<TService>(server);
         }
     }
 }

@@ -5,18 +5,11 @@ namespace CodingMilitia.Grpc.Server.Internal
 {
     public class GrpcHost<TService> where TService : class, IGrpcService
     {
-        GrpcCore.Server _server;
+        private readonly GrpcCore.Server _server;
 
-        public GrpcHost(GrpcCore.ServerServiceDefinition serviceDefinition)
+        public GrpcHost(GrpcCore.Server server)
         {
-            _server = new GrpcCore.Server
-            {
-                Ports = { { "127.0.0.1", 5000, GrpcCore.ServerCredentials.Insecure } },
-                Services =
-                {
-                    serviceDefinition
-                }
-            };
+            _server = server;
         }
 
         public void Start()
