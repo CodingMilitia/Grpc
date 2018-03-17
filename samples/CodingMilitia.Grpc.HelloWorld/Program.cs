@@ -31,36 +31,42 @@ namespace CodingMilitia.Grpc.HelloWorld
             var t = Task.Run(async () =>
             {
                 await Task.Delay(5000);
-                await RunHammerClientAsync();
+                var client = new HammeredSampleServiceClient();
+                var request = new SampleRequest { Value = 1 };
+                var response = await client.SendAsync(request, CancellationToken.None);
+                Console.WriteLine("{0} -> {1}", request.Value, response.Value);
             });
 
             await hostBuilder.RunConsoleAsync();
             await t;
         }
 
-        private static async Task RunHammerClientAsync()
+        class HammeredSampleServiceClient : ISampleService
         {
-            var channel = new G.Channel("127.0.0.1", 5000, G.ChannelCredentials.Insecure);
-            var invoker = new G.DefaultCallInvoker(channel);
-            var method = MethodDefinitionGenerator
-                .CreateMethodDefinition<SampleRequest,SampleResponse>(G.MethodType.Unary, "SampleService", "Send");
-            
-            using (var call = invoker.AsyncUnaryCall(method, null, new G.CallOptions { }, new SampleRequest { Value = 3 }))
+            private readonly G.Channel _channel;
+            private readonly G.DefaultCallInvoker _invoker;
+            private static readonly G.Method<SampleRequest, SampleResponse> Method 
+                = MethodDefinitionGenerator.CreateMethodDefinition<SampleRequest, SampleResponse>(G.MethodType.Unary, "SampleService", "Send");
+
+            public HammeredSampleServiceClient()
             {
-                var result = await call.ResponseAsync;
-                Console.WriteLine(result.Value);
+                _channel = new G.Channel("127.0.0.1", 5000, G.ChannelCredentials.Insecure);
+                _invoker = new G.DefaultCallInvoker(_channel);
             }
 
-            await channel.ShutdownAsync();
+            public async Task<SampleResponse> SendAsync(SampleRequest request, CancellationToken ct)
+            {
+                var callOptions = new G.CallOptions(cancellationToken: ct);
+                using (var call = _invoker.AsyncUnaryCall(Method, null, callOptions, request))
+                {
+                    return await call.ResponseAsync.ConfigureAwait(false);
+                }
+            }
+
+            public async Task ShutdownAsync()
+            {
+                await _channel.ShutdownAsync();
+            }
         }
     }
-
-    
-
-    
-    
-
-    
-
-
 }
