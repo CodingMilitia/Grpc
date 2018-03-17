@@ -20,7 +20,7 @@ namespace CodingMilitia.Grpc.Server.Internal
 
         public async Task StopAsync()
         {
-            await _server.ShutdownAsync();
+            await _server.ShutdownAsync().ConfigureAwait(false);
         }
     }
 }

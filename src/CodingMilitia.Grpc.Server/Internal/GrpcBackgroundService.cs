@@ -24,7 +24,7 @@ namespace CodingMilitia.Grpc.Server.Internal
 
         public async Task StopAsync(CancellationToken cancellationToken)
         {
-            await _host.StopAsync();
+            await _host.StopAsync().ConfigureAwait(false);
         }
     }
 }

@@ -54,7 +54,7 @@ namespace CodingMilitia.Grpc.Server.Internal
                         {
                             baseService.Context = context;
                         }
-                        return await handler(service, request, CancellationToken.None);
+                        return await handler(service, request, CancellationToken.None).ConfigureAwait(false);
                     }
                 }
             );
