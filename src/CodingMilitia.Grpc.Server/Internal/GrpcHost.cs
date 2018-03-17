@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using GrpcCore = Grpc.Core;
+using CodingMilitia.Grpc.Shared;
 
 namespace CodingMilitia.Grpc.Server.Internal
 {

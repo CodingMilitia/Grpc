@@ -1,4 +1,4 @@
-namespace CodingMilitia.Grpc.Server
+namespace CodingMilitia.Grpc.Shared
 {
     public interface IGrpcService
     {

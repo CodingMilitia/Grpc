@@ -1,4 +1,5 @@
 using Grpc.Core;
+using CodingMilitia.Grpc.Shared;
 
 namespace CodingMilitia.Grpc.Server
 {

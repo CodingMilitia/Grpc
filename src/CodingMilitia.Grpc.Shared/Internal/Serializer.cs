@@ -8,7 +8,7 @@ namespace CodingMilitia.Grpc.Shared.Internal
     //TODO: review visibility
     
     //From: https://github.com/Horusiath/GrpcSample/blob/master/GrpcSample.Shared/Serializer.cs
-    public static class Serializer<T>
+    internal static class Serializer<T>
     {
         public static byte[] ToBytes(T input)
         {

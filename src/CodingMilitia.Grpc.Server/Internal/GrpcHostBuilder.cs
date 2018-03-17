@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CodingMilitia.Grpc.Shared.Internal;
 using Grpc.Core;
 using Microsoft.Extensions.DependencyInjection;
+using CodingMilitia.Grpc.Shared;
 
 namespace CodingMilitia.Grpc.Server.Internal
 {
@@ -42,7 +43,7 @@ namespace CodingMilitia.Grpc.Server.Internal
             where TResponse : class
         {
             _builder.AddMethod(
-                CreateMethodDefinition<TRequest, TResponse>(MethodType.Unary, serviceName, methodName),
+                MethodDefinitionGenerator.CreateMethodDefinition<TRequest, TResponse>(MethodType.Unary, serviceName, methodName),
                 async (request, context) =>
                 {
                     using (var scope = _appServices.CreateScope())
@@ -60,28 +61,7 @@ namespace CodingMilitia.Grpc.Server.Internal
             return this;
         }
 
-        private static Method<TRequest, TResponse> CreateMethodDefinition<TRequest, TResponse>(
-            MethodType methodType,
-            string serviceName,
-            string methodName
-        )
-            where TRequest : class
-            where TResponse : class
-        {
-            return new Method<TRequest, TResponse>(
-                type: methodType,
-                serviceName: serviceName,
-                name: methodName,
-                requestMarshaller: Marshallers.Create(
-                    serializer: Serializer<TRequest>.ToBytes,
-                    deserializer: Serializer<TRequest>.FromBytes
-                ),
-                responseMarshaller: Marshallers.Create(
-                    serializer: Serializer<TResponse>.ToBytes,
-                    deserializer: Serializer<TResponse>.FromBytes
-                )
-            );
-        }
+        
 
         internal GrpcHost<TService> Build()
         {

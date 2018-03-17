@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using CodingMilitia.Grpc.HelloWorld.Service;
 using CodingMilitia.Grpc.Server;
 using CodingMilitia.Grpc.Shared.Attributes;
 using CodingMilitia.Grpc.Shared.Internal;
@@ -41,19 +42,9 @@ namespace CodingMilitia.Grpc.HelloWorld
         {
             var channel = new G.Channel("127.0.0.1", 5000, G.ChannelCredentials.Insecure);
             var invoker = new G.DefaultCallInvoker(channel);
-            var method = new G.Method<SampleRequest, SampleResponse>(
-                type: G.MethodType.Unary,
-                serviceName: "SampleService",
-                name: "Send",
-                requestMarshaller: G.Marshallers.Create(
-                    serializer: Serializer<SampleRequest>.ToBytes,
-                    deserializer: Serializer<SampleRequest>.FromBytes
-                ),
-                responseMarshaller: G.Marshallers.Create(
-                    serializer: Serializer<SampleResponse>.ToBytes,
-                    deserializer: Serializer<SampleResponse>.FromBytes
-                )
-            );
+            var method = MethodDefinitionGenerator
+                .CreateMethodDefinition<SampleRequest,SampleResponse>(G.MethodType.Unary, "SampleService", "Send");
+            
             using (var call = invoker.AsyncUnaryCall(method, null, new G.CallOptions { }, new SampleRequest { Value = 3 }))
             {
                 var result = await call.ResponseAsync;
@@ -64,36 +55,12 @@ namespace CodingMilitia.Grpc.HelloWorld
         }
     }
 
-    [GrpcService("SampleService")] //TODO: not being used right now
-    interface ISampleService : IGrpcService
-    {
-        Task<SampleResponse> SendAsync(SampleRequest request, CancellationToken ct);
-    }
+    
 
-    class SampleService : ISampleService
-    {
-        public Task<SampleResponse> SendAsync(SampleRequest request, CancellationToken ct)
-        {
-            return Task.FromResult(new SampleResponse
-            {
-                Value = request.Value + 1
-            });
-        }
-    }
+    
+    
 
-    [Bond.Schema]
-    class SampleRequest
-    {
-        [Bond.Id(0)]
-        public int Value { get; set; }
-    }
-
-    [Bond.Schema]
-    class SampleResponse
-    {
-        [Bond.Id(0)]
-        public int Value { get; set; }
-    }
+    
 
 
 }

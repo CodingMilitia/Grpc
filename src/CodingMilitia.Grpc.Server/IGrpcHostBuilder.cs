@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using CodingMilitia.Grpc.Shared;
 
 namespace CodingMilitia.Grpc.Server
 {

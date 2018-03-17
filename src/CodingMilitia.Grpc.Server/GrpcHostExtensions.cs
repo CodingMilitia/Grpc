@@ -2,6 +2,7 @@ using System;
 using CodingMilitia.Grpc.Server.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using CodingMilitia.Grpc.Shared;
 
 namespace CodingMilitia.Grpc.Server
 {
