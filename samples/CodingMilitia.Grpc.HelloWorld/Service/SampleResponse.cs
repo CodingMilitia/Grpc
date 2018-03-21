@@ -1,7 +1,7 @@
 namespace CodingMilitia.Grpc.HelloWorld.Service
 {
     [Bond.Schema]
-    class SampleResponse
+    public class SampleResponse
     {
         [Bond.Id(0)]
         public int Value { get; set; }

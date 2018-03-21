@@ -8,7 +8,7 @@ namespace CodingMilitia.Grpc.Server
     public interface IGrpcHostBuilder<TService> where TService : class, IGrpcService
     {
         //TODO: server credentials and probably more stuff
-        IGrpcHostBuilder<TService> SetUri(string uri);
+        IGrpcHostBuilder<TService> SetUrl(string url);
         IGrpcHostBuilder<TService> SetPort(int port);
         IGrpcHostBuilder<TService> AddUnaryMethod<TRequest, TResponse>(
            Func<TService, TRequest, CancellationToken, Task<TResponse>> handler,

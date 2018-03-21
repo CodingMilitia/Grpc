@@ -8,15 +8,6 @@ namespace CodingMilitia.Grpc.Server
 {
     public static class GrpcHostExtensions
     {
-        public static IServiceCollection AddGrpcServer<TService>(
-            this IServiceCollection serviceCollection,
-            Action<IGrpcHostBuilder<TService>> serviceConfigurator
-        )
-            where TService : class, IGrpcService
-        {
-            return AddGrpcServer<TService, TService>(serviceCollection, serviceConfigurator);
-        }
-
         public static IServiceCollection AddGrpcServer<TServiceInterface, TServiceImplementation>(
             this IServiceCollection serviceCollection,
             Action<IGrpcHostBuilder<TServiceInterface>> serviceConfigurator

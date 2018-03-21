@@ -13,7 +13,7 @@ namespace CodingMilitia.Grpc.Server.Internal
     {
         private readonly IServiceProvider _appServices;
         private readonly ServerServiceDefinition.Builder _builder;
-        private string _uri = "127.0.0.1";
+        private string _url = "127.0.0.1";
         private int _port = 5000;
 
         public GrpcHostBuilder(IServiceProvider appServices)
@@ -22,9 +22,9 @@ namespace CodingMilitia.Grpc.Server.Internal
             _builder = ServerServiceDefinition.CreateBuilder();
         }
 
-        public IGrpcHostBuilder<TService> SetUri(string uri)
+        public IGrpcHostBuilder<TService> SetUrl(string url)
         {
-            _uri = uri;
+            _url = url;
             return this;
         }
 
@@ -67,7 +67,7 @@ namespace CodingMilitia.Grpc.Server.Internal
         {
             var server = new global::Grpc.Core.Server
             {
-                Ports = { { _uri, _port, ServerCredentials.Insecure } },
+                Ports = { { _url, _port, ServerCredentials.Insecure } },
                 Services =
                 {
                     _builder.Build()
