@@ -30,14 +30,14 @@ namespace CodingMilitia.Grpc.Client.Internal
             var ctorBuilder = typeBuilder.DefineConstructor(
                 MethodAttributes.Public,
                 CallingConventions.Standard,
-                new[] { typeof(GrpcClientBaseOptions) }
+                new[] { typeof(GrpcClientOptions) }
             );
 
             var il = ctorBuilder.GetILGenerator();
             il.Emit(OpCodes.Ldarg_0); //load this
             il.Emit(OpCodes.Ldarg_1); //load options
             var clientBaseType = typeof(GrpcClientBase);
-            var ctorToCall = clientBaseType.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, new[] { typeof(GrpcClientBaseOptions) }, null);
+            var ctorToCall = clientBaseType.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, new[] { typeof(GrpcClientOptions) }, null);
             il.Emit(OpCodes.Call, ctorToCall);//call base class method
             il.Emit(OpCodes.Ret);
         }

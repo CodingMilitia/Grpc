@@ -10,8 +10,7 @@ namespace CodingMilitia.Grpc.Client.Internal
         private readonly G.Channel _channel;
         private readonly G.DefaultCallInvoker _invoker;
 
-        //TODO: remove the hammer
-        protected GrpcClientBase(GrpcClientBaseOptions options)
+        protected GrpcClientBase(GrpcClientOptions options)
         {
             _channel = new G.Channel(options.Url, options.Port, G.ChannelCredentials.Insecure);
             _invoker = new G.DefaultCallInvoker(_channel);
