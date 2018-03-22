@@ -38,7 +38,7 @@ namespace CodingMilitia.Grpc.Client.Internal
             il.Emit(OpCodes.Ldarg_1); //load options
             var clientBaseType = typeof(GrpcClientBase);
             var ctorToCall = clientBaseType.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, new[] { typeof(GrpcClientOptions) }, null);
-            il.Emit(OpCodes.Call, ctorToCall);//call base class method
+            il.Emit(OpCodes.Call, ctorToCall);//call base class constructor
             il.Emit(OpCodes.Ret);
         }
 
