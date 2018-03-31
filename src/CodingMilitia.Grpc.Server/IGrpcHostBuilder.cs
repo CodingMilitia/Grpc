@@ -10,12 +10,12 @@ namespace CodingMilitia.Grpc.Server
         //TODO: server credentials and probably more stuff
         IGrpcHostBuilder<TService> SetUrl(string url);
         IGrpcHostBuilder<TService> SetPort(int port);
-        IGrpcHostBuilder<TService> AddUnaryMethod<TRequest, TResponse>(
-           Func<TService, TRequest, CancellationToken, Task<TResponse>> handler,
-           string serviceName,
-           string methodName
-       )
-           where TRequest : class
-           where TResponse : class;
+    //     IGrpcHostBuilder<TService> AddUnaryMethod<TRequest, TResponse>(
+    //        Func<TService, TRequest, CancellationToken, Task<TResponse>> handler,
+    //        string serviceName,
+    //        string methodName
+    //    )
+    //        where TRequest : class
+    //        where TResponse : class;
     }
 }

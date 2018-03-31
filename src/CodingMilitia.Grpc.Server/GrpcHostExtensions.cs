@@ -10,7 +10,7 @@ namespace CodingMilitia.Grpc.Server
     {
         public static IServiceCollection AddGrpcServer<TServiceInterface, TServiceImplementation>(
             this IServiceCollection serviceCollection,
-            Action<IGrpcHostBuilder<TServiceInterface>> serviceConfigurator
+            GrpcServerOptions options = null
         )
             where TServiceInterface : class, IGrpcService
             where TServiceImplementation : class, IGrpcService, TServiceInterface
@@ -19,7 +19,11 @@ namespace CodingMilitia.Grpc.Server
             serviceCollection.AddSingleton<GrpcHost<TServiceInterface>>(appServices =>
             {
                 var builder = new GrpcHostBuilder<TServiceInterface>(appServices);
-                serviceConfigurator(builder);
+                if (options != null)
+                {
+                    builder.SetUrl(options.Url);
+                    builder.SetPort(options.Port);
+                }
                 return builder.Build();
             });
             serviceCollection.AddSingleton<IHostedService, GrpcBackgroundService<TServiceInterface>>();

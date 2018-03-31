@@ -16,14 +16,7 @@ namespace CodingMilitia.Grpc.HelloWorld
             var hostBuilder = new HostBuilder()
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddGrpcServer<ISampleService, SampleService>(builder =>
-                    {
-                        builder.AddUnaryMethod(
-                            (ISampleService service, SampleRequest request, CancellationToken ct) => service.SendAsync(request, ct),
-                            "SampleService",
-                            "Send"
-                        );
-                    });
+                    services.AddGrpcServer<ISampleService, SampleService>();
                 });
 
             var t = Task.Run(async () =>

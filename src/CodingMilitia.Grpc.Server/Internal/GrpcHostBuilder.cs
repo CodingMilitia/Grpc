@@ -6,6 +6,8 @@ using CodingMilitia.Grpc.Shared.Internal;
 using Grpc.Core;
 using Microsoft.Extensions.DependencyInjection;
 using CodingMilitia.Grpc.Shared;
+using System.Reflection;
+using CodingMilitia.Grpc.Shared.Attributes;
 
 namespace CodingMilitia.Grpc.Server.Internal
 {
@@ -34,7 +36,44 @@ namespace CodingMilitia.Grpc.Server.Internal
             return this;
         }
 
-        public IGrpcHostBuilder<TService> AddUnaryMethod<TRequest, TResponse>(
+        internal GrpcHost<TService> Build()
+        {
+            AddMethods();
+            var server = new global::Grpc.Core.Server
+            {
+                Ports = { { _url, _port, ServerCredentials.Insecure } },
+                Services =
+                {
+                    _builder.Build()
+                }
+            };
+            return new GrpcHost<TService>(server);
+        }
+
+        private void AddMethods()
+        {
+            var serviceType = typeof(TService);
+            var serviceName = ((GrpcServiceAttribute)serviceType.GetCustomAttribute(typeof(GrpcServiceAttribute))).Name ?? serviceType.Name;
+
+            foreach (var method in serviceType.GetMethods())
+            {
+                var requestType = method.GetParameters()[0].ParameterType;
+                var responseType = method.ReturnType.GenericTypeArguments[0];
+
+                var handlerGenerator = typeof(MethodHandlerGenerator).GetMethod(nameof(MethodHandlerGenerator.GenerateUnaryMethodHandler));
+                handlerGenerator = handlerGenerator.MakeGenericMethod(serviceType, requestType, responseType);
+                var handler = handlerGenerator.Invoke(null, new[] { method });
+
+                var addUnaryMethod = this.GetType().GetMethod(nameof(AddUnaryMethod), BindingFlags.NonPublic | BindingFlags.Instance);
+                addUnaryMethod = addUnaryMethod.MakeGenericMethod(requestType, responseType);
+
+                var methodName = ((GrpcMethodAttribute)method.GetCustomAttribute(typeof(GrpcMethodAttribute))).Name ?? method.Name;
+
+                addUnaryMethod.Invoke(this, new[] { handler, serviceName, methodName });
+            }
+        }
+
+        private IGrpcHostBuilder<TService> AddUnaryMethod<TRequest, TResponse>(
             Func<TService, TRequest, CancellationToken, Task<TResponse>> handler,
             string serviceName,
             string methodName
@@ -59,21 +98,6 @@ namespace CodingMilitia.Grpc.Server.Internal
                 }
             );
             return this;
-        }
-
-        
-
-        internal GrpcHost<TService> Build()
-        {
-            var server = new global::Grpc.Core.Server
-            {
-                Ports = { { _url, _port, ServerCredentials.Insecure } },
-                Services =
-                {
-                    _builder.Build()
-                }
-            };
-            return new GrpcHost<TService>(server);
         }
     }
 }

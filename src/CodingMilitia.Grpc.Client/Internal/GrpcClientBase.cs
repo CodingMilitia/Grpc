@@ -16,22 +16,22 @@ namespace CodingMilitia.Grpc.Client.Internal
             _invoker = new G.DefaultCallInvoker(_channel);
         }
 
-        protected async Task<TResponse> CallUnaryMethodAsync<TRequest, TResponse>(TRequest request, CancellationToken ct)
+        protected async Task<TResponse> CallUnaryMethodAsync<TRequest, TResponse>(TRequest request, string serviceName, string methodName, CancellationToken ct)
             where TRequest : class
             where TResponse : class
         {
             var callOptions = new G.CallOptions(cancellationToken: ct);
-            using (var call = _invoker.AsyncUnaryCall(GetMethodDefinition<TRequest, TResponse>(G.MethodType.Unary), null, callOptions, request))
+            using (var call = _invoker.AsyncUnaryCall(GetMethodDefinition<TRequest, TResponse>(G.MethodType.Unary, serviceName, methodName), null, callOptions, request))
             {
                 return await call.ResponseAsync.ConfigureAwait(false);
             }
         }
 
-        private G.Method<TRequest, TResponse> GetMethodDefinition<TRequest, TResponse>(G.MethodType methodType)
+        private G.Method<TRequest, TResponse> GetMethodDefinition<TRequest, TResponse>(G.MethodType methodType, string serviceName, string methodName)
             where TRequest : class
             where TResponse : class
         {
-            return MethodDefinitionGenerator.CreateMethodDefinition<TRequest, TResponse>(methodType, "SampleService", "Send");
+            return MethodDefinitionGenerator.CreateMethodDefinition<TRequest, TResponse>(methodType, serviceName, methodName);
         }
     }
 }

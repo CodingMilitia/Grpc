@@ -14,7 +14,7 @@ namespace CodingMilitia.Grpc.HelloWorld.Client
 
         public Task<SampleResponse> SendAsync(SampleRequest request, CancellationToken ct)
         {
-            return CallUnaryMethodAsync<SampleRequest, SampleResponse>(request, ct);
+            return CallUnaryMethodAsync<SampleRequest, SampleResponse>(request, "SampleService", "Send", ct);
         }
     }
 }

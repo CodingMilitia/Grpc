@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using CodingMilitia.Grpc.Shared;
+using CodingMilitia.Grpc.Shared.Attributes;
 
 namespace CodingMilitia.Grpc.Client.Internal
 {
@@ -53,6 +54,10 @@ namespace CodingMilitia.Grpc.Client.Internal
         private void AddMethod(TypeBuilder typeBuilder, MethodInfo method)
         {
             //ok, now I'm way out of my league...
+
+            var serviceName = ((GrpcServiceAttribute)method.DeclaringType.GetCustomAttribute(typeof(GrpcServiceAttribute))).Name ?? method.DeclaringType.Name;
+            var methodName = ((GrpcMethodAttribute)method.GetCustomAttribute(typeof(GrpcMethodAttribute))).Name ?? method.Name;
+
             var args = method.GetParameters();
             var methodBuilder = typeBuilder.DefineMethod(
                 method.Name,
@@ -63,9 +68,13 @@ namespace CodingMilitia.Grpc.Client.Internal
             var il = methodBuilder.GetILGenerator();
             il.Emit(OpCodes.Ldarg_0); //load this
             il.Emit(OpCodes.Ldarg_1); //load request
+            il.Emit(OpCodes.Ldstr, serviceName); //load constant service name as argument
+            il.Emit(OpCodes.Ldstr, methodName); //load constant method name as argument
             il.Emit(OpCodes.Ldarg_2); //load cancellation token
             var clientBaseType = typeof(GrpcClientBase);
             var methodToCall = clientBaseType.GetMethod("CallUnaryMethodAsync", BindingFlags.Instance | BindingFlags.NonPublic);
+
+
 
             il.Emit(
                 OpCodes.Call,

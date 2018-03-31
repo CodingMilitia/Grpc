@@ -6,9 +6,10 @@ using CodingMilitia.Grpc.Shared.Attributes;
 
 namespace CodingMilitia.Grpc.HelloWorld.Service
 {
-    [GrpcService("SampleService")] //TODO: not being used right now
+    [GrpcService("SampleService")]
     public interface ISampleService : IGrpcService
     {
+        [GrpcMethod("Send")]
         Task<SampleResponse> SendAsync(SampleRequest request, CancellationToken ct);
     }
 }
