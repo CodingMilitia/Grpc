@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CodingMilitia.Grpc.Client;
 using CodingMilitia.Grpc.HelloWorld.Client;
 using CodingMilitia.Grpc.HelloWorld.Service;
+using CodingMilitia.Grpc.Serializers;
 using CodingMilitia.Grpc.Server;
 using Microsoft.Extensions.Hosting;
 

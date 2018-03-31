@@ -12,5 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CodingMilitia.Grpc.Shared\CodingMilitia.Grpc.Shared.csproj" />
+    <ProjectReference Include="..\CodingMilitia.Grpc.Serializers.Bond\CodingMilitia.Grpc.Serializers.Bond.csproj" />
   </ItemGroup>
 </Project>

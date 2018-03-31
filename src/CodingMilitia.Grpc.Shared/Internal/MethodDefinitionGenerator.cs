@@ -1,3 +1,5 @@
+using System;
+using CodingMilitia.Grpc.Serializers;
 using Grpc.Core;
 
 namespace CodingMilitia.Grpc.Shared.Internal
@@ -8,7 +10,8 @@ namespace CodingMilitia.Grpc.Shared.Internal
         public static Method<TRequest, TResponse> CreateMethodDefinition<TRequest, TResponse>(
             MethodType methodType,
             string serviceName,
-            string methodName
+            string methodName,
+            ISerializer serializer
         )
             where TRequest : class
             where TResponse : class
@@ -18,12 +21,12 @@ namespace CodingMilitia.Grpc.Shared.Internal
                 serviceName: serviceName,
                 name: methodName,
                 requestMarshaller: Marshallers.Create(
-                    serializer: Serializer<TRequest>.ToBytes,
-                    deserializer: Serializer<TRequest>.FromBytes
+                    serializer: serializer.ToBytes<TRequest>,
+                    deserializer: serializer.FromBytes<TRequest>
                 ),
                 responseMarshaller: Marshallers.Create(
-                    serializer: Serializer<TResponse>.ToBytes,
-                    deserializer: Serializer<TResponse>.FromBytes
+                    serializer: serializer.ToBytes<TResponse>,
+                    deserializer: serializer.FromBytes<TResponse>
                 )
             );
         }

@@ -1,19 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  
-
   <ItemGroup>
     <ProjectReference Include="..\CodingMilitia.Grpc.Shared\CodingMilitia.Grpc.Shared.csproj" />
-    <ProjectReference Include="..\CodingMilitia.Grpc.Serializers.Bond\CodingMilitia.Grpc.Serializers.Bond.csproj" />
   </ItemGroup>
-
-  
 
   <ItemGroup>
-    <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
+    <PackageReference Include="Bond.Csharp" Version="7.0.1" />
   </ItemGroup>
-
-  
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>

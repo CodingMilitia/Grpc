@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using CodingMilitia.Grpc.Serializers;
 using CodingMilitia.Grpc.Shared;
 using CodingMilitia.Grpc.Shared.Attributes;
 
@@ -31,14 +32,15 @@ namespace CodingMilitia.Grpc.Client.Internal
             var ctorBuilder = typeBuilder.DefineConstructor(
                 MethodAttributes.Public,
                 CallingConventions.Standard,
-                new[] { typeof(GrpcClientOptions) }
+                new[] { typeof(GrpcClientOptions), typeof(ISerializer) }
             );
 
             var il = ctorBuilder.GetILGenerator();
             il.Emit(OpCodes.Ldarg_0); //load this
             il.Emit(OpCodes.Ldarg_1); //load options
+            il.Emit(OpCodes.Ldarg_2); //load serializer
             var clientBaseType = typeof(GrpcClientBase);
-            var ctorToCall = clientBaseType.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, new[] { typeof(GrpcClientOptions) }, null);
+            var ctorToCall = clientBaseType.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, new[] { typeof(GrpcClientOptions), typeof(ISerializer) }, null);
             il.Emit(OpCodes.Call, ctorToCall);//call base class constructor
             il.Emit(OpCodes.Ret);
         }

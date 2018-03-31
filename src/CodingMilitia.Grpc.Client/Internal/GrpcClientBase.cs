@@ -1,5 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
+using CodingMilitia.Grpc.Serializers;
 using CodingMilitia.Grpc.Shared.Internal;
 using G = Grpc.Core;
 
@@ -9,11 +10,13 @@ namespace CodingMilitia.Grpc.Client.Internal
     {
         private readonly G.Channel _channel;
         private readonly G.DefaultCallInvoker _invoker;
+        private readonly ISerializer _serializer;
 
-        protected GrpcClientBase(GrpcClientOptions options)
+        protected GrpcClientBase(GrpcClientOptions options, ISerializer serializer)
         {
             _channel = new G.Channel(options.Url, options.Port, G.ChannelCredentials.Insecure);
             _invoker = new G.DefaultCallInvoker(_channel);
+            _serializer = serializer;
         }
 
         protected async Task<TResponse> CallUnaryMethodAsync<TRequest, TResponse>(TRequest request, string serviceName, string methodName, CancellationToken ct)
@@ -31,7 +34,7 @@ namespace CodingMilitia.Grpc.Client.Internal
             where TRequest : class
             where TResponse : class
         {
-            return MethodDefinitionGenerator.CreateMethodDefinition<TRequest, TResponse>(methodType, serviceName, methodName);
+            return MethodDefinitionGenerator.CreateMethodDefinition<TRequest, TResponse>(methodType, serviceName, methodName, _serializer);
         }
     }
 }

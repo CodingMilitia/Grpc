@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using CodingMilitia.Grpc.Serializers;
 using CodingMilitia.Grpc.Shared;
 
 namespace CodingMilitia.Grpc.Server
@@ -10,6 +11,7 @@ namespace CodingMilitia.Grpc.Server
         //TODO: server credentials and probably more stuff
         IGrpcHostBuilder<TService> SetUrl(string url);
         IGrpcHostBuilder<TService> SetPort(int port);
+        IGrpcHostBuilder<TService> SetSerializer(ISerializer serializer);
     //     IGrpcHostBuilder<TService> AddUnaryMethod<TRequest, TResponse>(
     //        Func<TService, TRequest, CancellationToken, Task<TResponse>> handler,
     //        string serviceName,

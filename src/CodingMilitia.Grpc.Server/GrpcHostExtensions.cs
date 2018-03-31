@@ -3,6 +3,7 @@ using CodingMilitia.Grpc.Server.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using CodingMilitia.Grpc.Shared;
+using CodingMilitia.Grpc.Serializers;
 
 namespace CodingMilitia.Grpc.Server
 {
@@ -10,7 +11,8 @@ namespace CodingMilitia.Grpc.Server
     {
         public static IServiceCollection AddGrpcServer<TServiceInterface, TServiceImplementation>(
             this IServiceCollection serviceCollection,
-            GrpcServerOptions options = null
+            GrpcServerOptions options = null,
+            ISerializer serializer = null
         )
             where TServiceInterface : class, IGrpcService
             where TServiceImplementation : class, IGrpcService, TServiceInterface
@@ -24,6 +26,7 @@ namespace CodingMilitia.Grpc.Server
                     builder.SetUrl(options.Url);
                     builder.SetPort(options.Port);
                 }
+                builder.SetSerializer(serializer ?? new BondSerializer());
                 return builder.Build();
             });
             serviceCollection.AddSingleton<IHostedService, GrpcBackgroundService<TServiceInterface>>();

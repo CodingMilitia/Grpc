@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{E150
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingMilitia.Grpc.HelloWorld", "samples\CodingMilitia.Grpc.HelloWorld\CodingMilitia.Grpc.HelloWorld.csproj", "{607033DA-E222-408D-94D6-90FBC81BBC80}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingMilitia.Grpc.Serializers.Bond", "src\CodingMilitia.Grpc.Serializers.Bond\CodingMilitia.Grpc.Serializers.Bond.csproj", "{311E0E52-0DD7-43E3-9256-52BDE0C6C07D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,6 +94,18 @@ Global
 		{607033DA-E222-408D-94D6-90FBC81BBC80}.Release|x64.Build.0 = Release|x64
 		{607033DA-E222-408D-94D6-90FBC81BBC80}.Release|x86.ActiveCfg = Release|x86
 		{607033DA-E222-408D-94D6-90FBC81BBC80}.Release|x86.Build.0 = Release|x86
+		{311E0E52-0DD7-43E3-9256-52BDE0C6C07D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{311E0E52-0DD7-43E3-9256-52BDE0C6C07D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{311E0E52-0DD7-43E3-9256-52BDE0C6C07D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{311E0E52-0DD7-43E3-9256-52BDE0C6C07D}.Debug|x64.Build.0 = Debug|Any CPU
+		{311E0E52-0DD7-43E3-9256-52BDE0C6C07D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{311E0E52-0DD7-43E3-9256-52BDE0C6C07D}.Debug|x86.Build.0 = Debug|Any CPU
+		{311E0E52-0DD7-43E3-9256-52BDE0C6C07D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{311E0E52-0DD7-43E3-9256-52BDE0C6C07D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{311E0E52-0DD7-43E3-9256-52BDE0C6C07D}.Release|x64.ActiveCfg = Release|Any CPU
+		{311E0E52-0DD7-43E3-9256-52BDE0C6C07D}.Release|x64.Build.0 = Release|Any CPU
+		{311E0E52-0DD7-43E3-9256-52BDE0C6C07D}.Release|x86.ActiveCfg = Release|Any CPU
+		{311E0E52-0DD7-43E3-9256-52BDE0C6C07D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{62C7ACC6-E809-4AD3-8E07-2BA72F79FFE4} = {76CBEA9A-1F6E-4CF6-B314-F5B88D452B91}
@@ -99,5 +113,6 @@ Global
 		{EEC3CE9B-D020-43FD-80C5-65CE0F2A7FDB} = {76CBEA9A-1F6E-4CF6-B314-F5B88D452B91}
 		{DEDBE1C6-1F67-470D-B8A5-45DABD870F59} = {74A1893A-EF98-43E8-90E1-0F128107EF8F}
 		{607033DA-E222-408D-94D6-90FBC81BBC80} = {E1502AB3-420F-405E-A876-183D281FDF42}
+		{311E0E52-0DD7-43E3-9256-52BDE0C6C07D} = {76CBEA9A-1F6E-4CF6-B314-F5B88D452B91}
 	EndGlobalSection
 EndGlobal

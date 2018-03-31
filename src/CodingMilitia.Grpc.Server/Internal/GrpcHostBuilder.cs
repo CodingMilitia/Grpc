@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using CodingMilitia.Grpc.Shared;
 using System.Reflection;
 using CodingMilitia.Grpc.Shared.Attributes;
+using CodingMilitia.Grpc.Serializers;
 
 namespace CodingMilitia.Grpc.Server.Internal
 {
@@ -17,6 +18,7 @@ namespace CodingMilitia.Grpc.Server.Internal
         private readonly ServerServiceDefinition.Builder _builder;
         private string _url = "127.0.0.1";
         private int _port = 5000;
+        private ISerializer _serializer;
 
         public GrpcHostBuilder(IServiceProvider appServices)
         {
@@ -33,6 +35,12 @@ namespace CodingMilitia.Grpc.Server.Internal
         public IGrpcHostBuilder<TService> SetPort(int port)
         {
             _port = port;
+            return this;
+        }
+
+        public IGrpcHostBuilder<TService> SetSerializer(ISerializer serializer)
+        {
+            _serializer = serializer;
             return this;
         }
 
@@ -82,7 +90,7 @@ namespace CodingMilitia.Grpc.Server.Internal
             where TResponse : class
         {
             _builder.AddMethod(
-                MethodDefinitionGenerator.CreateMethodDefinition<TRequest, TResponse>(MethodType.Unary, serviceName, methodName),
+                MethodDefinitionGenerator.CreateMethodDefinition<TRequest, TResponse>(MethodType.Unary, serviceName, methodName, _serializer),
                 async (request, context) =>
                 {
                     using (var scope = _appServices.CreateScope())
