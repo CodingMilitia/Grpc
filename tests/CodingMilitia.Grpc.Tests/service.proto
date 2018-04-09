@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option csharp_namespace = "CodingMilitia.Grpc.Tests.Generated";
+
+service SampleService {
+    rpc Send(SampleRequest) returns (SampleResponse) {}
+}
+
+message SampleRequest {
+    int32 value = 1;
+}
+
+message SampleResponse {
+    int32 value = 1;
+}

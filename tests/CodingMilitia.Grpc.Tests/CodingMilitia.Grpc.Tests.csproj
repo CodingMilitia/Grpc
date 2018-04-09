@@ -9,12 +9,17 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0-preview-20170628-02" />
     <PackageReference Include="xunit" Version="2.2.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
+    <PackageReference Include="Google.Protobuf" Version="3.5.1" />
+    <PackageReference Include="Grpc" Version="1.10.0" />
+    <PackageReference Include="Grpc.Tools" Version="1.10.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\CodingMilitia.Grpc.Shared\CodingMilitia.Grpc.Shared.csproj" />
     <ProjectReference Include="..\..\src\CodingMilitia.Grpc.Server\CodingMilitia.Grpc.Server.csproj" />
     <ProjectReference Include="..\..\src\CodingMilitia.Grpc.Client\CodingMilitia.Grpc.Client.csproj" />
+    <ProjectReference Include="..\..\src\CodingMilitia.Grpc.Serializers.ProtoBuf\CodingMilitia.Grpc.Serializers.ProtoBuf.csproj" />
+    <ProjectReference Include="..\..\src\CodingMilitia.Grpc.Serializers.Bond\CodingMilitia.Grpc.Serializers.Bond.csproj" />
   </ItemGroup>
 
 </Project>
