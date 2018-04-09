@@ -9,7 +9,7 @@ namespace CodingMilitia.Grpc.HelloWorld.Client
 {
     class HammeredSampleServiceClient : GrpcClientBase, ISampleService
     {
-        protected HammeredSampleServiceClient(GrpcClientOptions options) : base(options, new BondSerializer())
+        protected HammeredSampleServiceClient(GrpcClientOptions options) : base(options, new ProtoBufSerializer())
         {
         }
 

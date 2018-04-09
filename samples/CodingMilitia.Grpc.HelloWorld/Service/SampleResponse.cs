@@ -1,9 +1,9 @@
 namespace CodingMilitia.Grpc.HelloWorld.Service
 {
-    [Bond.Schema]
+    [ProtoBuf.ProtoContract]
     public class SampleResponse
     {
-        [Bond.Id(0)]
+        [ProtoBuf.ProtoMember(1)]
         public int Value { get; set; }
     }
 }

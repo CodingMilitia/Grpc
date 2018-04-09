@@ -7,28 +7,21 @@ using CodingMilitia.Grpc.Serializers;
 
 namespace CodingMilitia.Grpc.Server
 {
-    public static class GrpcHostExtensions
+    public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddGrpcServer<TServiceInterface, TServiceImplementation>(
             this IServiceCollection serviceCollection,
-            GrpcServerOptions options = null,
-            ISerializer serializer = null
+            GrpcServerOptions options,
+            ISerializer serializer
         )
             where TServiceInterface : class, IGrpcService
             where TServiceImplementation : class, IGrpcService, TServiceInterface
         {
             serviceCollection.AddScoped<TServiceInterface, TServiceImplementation>();
-            serviceCollection.AddSingleton<GrpcHost<TServiceInterface>>(appServices =>
-            {
-                var builder = new GrpcHostBuilder<TServiceInterface>(appServices);
-                if (options != null)
-                {
-                    builder.SetUrl(options.Url);
-                    builder.SetPort(options.Port);
-                }
-                builder.SetSerializer(serializer ?? new BondSerializer());
-                return builder.Build();
-            });
+            serviceCollection.AddSingleton<GrpcHost<TServiceInterface>>(
+                appServices => GrpcHostFactory.Create<TServiceInterface>(appServices, options, serializer)
+            );
+
             serviceCollection.AddSingleton<IHostedService, GrpcBackgroundService<TServiceInterface>>();
             return serviceCollection;
         }

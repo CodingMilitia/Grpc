@@ -9,10 +9,10 @@ namespace CodingMilitia.Grpc.Client
 {
     public static class GrpcClientFactory
     {
-        public static TService Generate<TService>(GrpcClientOptions options, ISerializer serializer = null) where TService : class, IGrpcService
+        public static TService Create<TService>(GrpcClientOptions options, ISerializer serializer) where TService : class, IGrpcService
         {
             var newType = new GrpcClientTypeBuilder().Create<TService>();
-            return (TService)Activator.CreateInstance(newType, options, serializer ?? new BondSerializer());
+            return (TService)Activator.CreateInstance(newType, options, serializer);
         }
     }
 }

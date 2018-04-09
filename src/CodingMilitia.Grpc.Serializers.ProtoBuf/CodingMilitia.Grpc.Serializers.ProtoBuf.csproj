@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CodingMilitia.Grpc.Shared\CodingMilitia.Grpc.Shared.csproj" />
+    <ProjectReference Include="..\CodingMilitia.Grpc.Server\CodingMilitia.Grpc.Server.csproj" />
+    <ProjectReference Include="..\CodingMilitia.Grpc.Client\CodingMilitia.Grpc.Client.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="protobuf-net" Version="2.3.7" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.0-preview1-final" />
+  </ItemGroup>
+
+</Project>

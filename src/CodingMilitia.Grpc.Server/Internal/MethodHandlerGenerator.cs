@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CodingMilitia.Grpc.Server.Internal
 {
-    public static class MethodHandlerGenerator
+    internal static class MethodHandlerGenerator
     {
         public static Func<TService, TRequest, CancellationToken, Task<TResponse>> GenerateUnaryMethodHandler<TService, TRequest, TResponse>(MethodInfo method)
             where TRequest : class

@@ -4,7 +4,7 @@ using CodingMilitia.Grpc.Shared;
 
 namespace CodingMilitia.Grpc.Server.Internal
 {
-    public class GrpcHost<TService> where TService : class, IGrpcService
+    internal class GrpcHost<TService> where TService : class, IGrpcService
     {
         private readonly GrpcCore.Server _server;
 

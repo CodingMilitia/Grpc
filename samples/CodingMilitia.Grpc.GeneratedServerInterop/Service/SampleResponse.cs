@@ -1,7 +1,7 @@
-namespace CodingMilitia.Grpc.HelloWorld.Service
+namespace CodingMilitia.Grpc.GeneratedServerInterop.Service
 {
     [ProtoBuf.ProtoContract]
-    public class SampleRequest
+    public class SampleResponse
     {
         [ProtoBuf.ProtoMember(1)]
         public int Value { get; set; }

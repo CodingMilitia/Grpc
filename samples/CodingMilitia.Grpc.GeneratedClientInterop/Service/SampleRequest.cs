@@ -1,4 +1,4 @@
-namespace CodingMilitia.Grpc.HelloWorld.Service
+namespace CodingMilitia.Grpc.GeneratedClientInterop.Service
 {
     [ProtoBuf.ProtoContract]
     public class SampleRequest

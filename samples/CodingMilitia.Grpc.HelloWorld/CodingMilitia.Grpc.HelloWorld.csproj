@@ -4,7 +4,7 @@
     <ProjectReference Include="..\..\src\CodingMilitia.Grpc.Server\CodingMilitia.Grpc.Server.csproj" />
     <ProjectReference Include="..\..\src\CodingMilitia.Grpc.Client\CodingMilitia.Grpc.Client.csproj" />
     <ProjectReference Include="..\..\src\CodingMilitia.Grpc.Shared\CodingMilitia.Grpc.Shared.csproj" />
-    <ProjectReference Include="..\..\src\CodingMilitia.Grpc.Serializers.Bond\CodingMilitia.Grpc.Serializers.Bond.csproj" />
+    <ProjectReference Include="..\..\src\CodingMilitia.Grpc.Serializers.ProtoBuf\CodingMilitia.Grpc.Serializers.ProtoBuf.csproj" />
   </ItemGroup>
 
   <ItemGroup>
