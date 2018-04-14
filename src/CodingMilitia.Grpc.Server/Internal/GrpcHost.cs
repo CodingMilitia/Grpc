@@ -13,9 +13,10 @@ namespace CodingMilitia.Grpc.Server.Internal
             _server = server;
         }
 
-        public void Start()
+        public Task StartAsync()
         {
             _server.Start();
+            return Task.CompletedTask;
         }
 
         public async Task StopAsync()

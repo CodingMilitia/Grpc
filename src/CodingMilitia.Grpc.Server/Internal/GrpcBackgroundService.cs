@@ -16,10 +16,9 @@ namespace CodingMilitia.Grpc.Server.Internal
             _host = host;
         }
 
-        public Task StartAsync(CancellationToken cancellationToken)
+        public async Task StartAsync(CancellationToken cancellationToken)
         {
-            _host.Start();
-            return Task.CompletedTask;
+            await _host.StartAsync().ConfigureAwait(false);
         }
 
         public async Task StopAsync(CancellationToken cancellationToken)
