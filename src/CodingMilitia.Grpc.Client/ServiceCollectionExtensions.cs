@@ -13,7 +13,7 @@ namespace CodingMilitia.Grpc.Client
         )
             where TServiceInterface : class, IGrpcService
         {
-            serviceCollection.AddSingleton<TServiceInterface>(GrpcClientFactory.Create<TServiceInterface>(options, serializer));
+            serviceCollection.AddSingleton<TServiceInterface>(_ => GrpcClientFactory.Create<TServiceInterface>(options, serializer));
             return serviceCollection;
         }
     }
