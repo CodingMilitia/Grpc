@@ -1,9 +1,7 @@
-using System;
+using CodingMilitia.Grpc.Shared;
+using Microsoft.Extensions.Hosting;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using CodingMilitia.Grpc.Shared;
 
 namespace CodingMilitia.Grpc.Server.Internal
 {

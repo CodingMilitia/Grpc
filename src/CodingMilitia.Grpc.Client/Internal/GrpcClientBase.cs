@@ -1,7 +1,7 @@
-using System.Threading;
-using System.Threading.Tasks;
 using CodingMilitia.Grpc.Serializers;
 using CodingMilitia.Grpc.Shared.Internal;
+using System.Threading;
+using System.Threading.Tasks;
 using G = Grpc.Core;
 
 namespace CodingMilitia.Grpc.Client.Internal

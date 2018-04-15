@@ -1,8 +1,8 @@
-using System;
-using System.Reflection;
 using CodingMilitia.Grpc.Serializers;
 using CodingMilitia.Grpc.Shared;
 using CodingMilitia.Grpc.Shared.Attributes;
+using System;
+using System.Reflection;
 
 namespace CodingMilitia.Grpc.Server.Internal
 {

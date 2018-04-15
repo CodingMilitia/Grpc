@@ -1,9 +1,8 @@
-using System;
+using CodingMilitia.Grpc.Serializers;
 using CodingMilitia.Grpc.Server.Internal;
+using CodingMilitia.Grpc.Shared;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using CodingMilitia.Grpc.Shared;
-using CodingMilitia.Grpc.Serializers;
 
 namespace CodingMilitia.Grpc.Server
 {

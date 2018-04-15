@@ -1,14 +1,11 @@
-using System;
-using System.Linq.Expressions;
-using System.Threading;
-using System.Threading.Tasks;
+using CodingMilitia.Grpc.Serializers;
+using CodingMilitia.Grpc.Shared;
 using CodingMilitia.Grpc.Shared.Internal;
 using Grpc.Core;
 using Microsoft.Extensions.DependencyInjection;
-using CodingMilitia.Grpc.Shared;
-using System.Reflection;
-using CodingMilitia.Grpc.Shared.Attributes;
-using CodingMilitia.Grpc.Serializers;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace CodingMilitia.Grpc.Server.Internal
 {
